@@ -92,3 +92,17 @@ int main()
 }
 
 
+
+/*
+
+Terminal 1:
+gcc tcp_server.c -o server 
+gcc tcp_client.c -o client 
+./server 
+
+Terminal 2:
+./client
+
+*/
+
+
