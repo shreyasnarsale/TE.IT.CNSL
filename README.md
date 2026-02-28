@@ -2,7 +2,6 @@
 **Course Code:** 314456  
 **Third Year – Information Technology (2019 Course)**  
 Savitribai Phule Pune University, Pune  
-Academic Year: 2025–26  
 
 ---
 
