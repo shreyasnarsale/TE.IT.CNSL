@@ -68,3 +68,19 @@ int main()
     return 0;
 }
 
+
+
+/*
+
+Terminal 1:-
+    gcc udp_server.c -o server
+    gcc udp_client.c -o client
+    ./server
+
+Terminal 2:-
+    ./server
+
+*/
+
+
+
