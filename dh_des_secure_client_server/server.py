@@ -46,3 +46,14 @@ print("Decrypted message:", plaintext.decode())
 
 conn.close()
 server.close()
+
+
+
+
+### Ensure the server IP must me in client file.
+
+### For Server PC:-
+python3 server.py
+
+### For Client PC:- 
+python3 client.py
