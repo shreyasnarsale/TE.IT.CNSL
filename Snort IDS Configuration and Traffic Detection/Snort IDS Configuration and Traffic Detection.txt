@@ -1,0 +1,135 @@
+### Snort IDS Configuration and Traffic Detection
+
+
+
+---
+
+#  **Snort IDS Practical – Complete Commands & Files**
+
+---
+
+##  1. Folder Structure
+
+```
+C:\Snort\
+│
+├── bin\
+├── etc\
+│   └── snort.conf
+├── rules\
+│   └── local.rules
+└── log\
+```
+
+---
+
+##  2. `local.rules` FILE
+
+ Path: `C:\Snort\rules\local.rules`
+
+```
+alert icmp any any -> any any (msg:"ICMP Ping Detected"; sid:1000001; rev:1;)
+```
+
+---
+
+##  3. `snort.conf` FILE (MINIMAL WORKING)
+
+ Path: `C:\Snort\etc\snort.conf`
+
+```
+# Basic Snort Configuration
+
+ipvar HOME_NET any
+ipvar EXTERNAL_NET any
+
+var RULE_PATH C:\Snort\rules
+
+include $RULE_PATH/local.rules
+
+config disable_decode_alerts
+config disable_tcpopt_experimental_alerts
+config disable_tcpopt_obsolete_alerts
+config disable_tcpopt_ttcp_alerts
+config disable_tcpopt_alerts
+config disable_ipopt_alerts
+
+config checksum_mode: none
+
+config detection: search-method ac-split search-optimize max-pattern-len 20
+config event_queue: max_queue 8 log 5 order_events content_length
+
+include classification.config
+include reference.config
+```
+
+---
+
+##  4. COMMANDS TO RUN
+
+###  Step 1: Open PowerShell (Run as Administrator)
+
+```
+cd C:\Snort\bin
+```
+
+---
+
+###  Step 2: Check Interfaces
+
+```
+.\snort -W
+```
+
+ Use:
+
+```
+9 → Loopback Adapter
+```
+
+---
+
+###  Step 3: Run Snort
+
+```
+.\snort -i 9 -c C:\Snort\etc\snort.conf -A console -k none
+```
+
+---
+
+###  Step 4: Open NEW CMD
+
+Run:
+
+```
+ping 127.0.0.1 -t
+```
+
+---
+
+##  5. OUTPUT
+
+You will see in Snort:
+
+```
+[**] ICMP Ping Detected [**] {ICMP} 127.0.0.1 -> 127.0.0.1
+```
+
+---
+
+##  6. STOP COMMAND
+
+```
+Ctrl + C
+```
+
+---
+
+##  7. OPTIONAL (HTTP RULE FOR EXTRA MARKS)
+
+Add in `local.rules`:
+
+```
+alert tcp any any -> any 80 (msg:"HTTP Traffic Detected"; sid:1000002; rev:1;)
+```
+
